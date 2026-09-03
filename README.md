@@ -1,4 +1,4 @@
-# 🗺️ WorkAdventure Map Starter Kit
+# 🗺️ Kit Inicial do Mapa WorkAdventure
 
 <a href="https://discord.gg/G6Xh9ZM9aR" target="blank"><img src="https://img.shields.io/discord/821338762134290432.svg?style=flat&label=Join%20Community&color=7289DA" alt="Join Community Badge"/></a>
 <a href="https://x.com/workadventure_" target="blank"><img src="https://img.shields.io/twitter/follow/workadventure_.svg?style=social" /></a>
@@ -6,203 +6,203 @@
 
 ![office map thumbnail](./office.png)
 
-🗺️ This is a starter kit to help you build your own map for [WorkAdventure](https://workadventu.re).
+🗺️ Este é um kit inicial para ajudar você a criar seu próprio mapa para o [WorkAdventure](https://workadventu.re).
 
-📚 To understand how to use this starter kit, follow [our tutorial](https://docs.workadventu.re/map-building/tiled-editor/).
+📚 Para entender como usar este kit inicial, siga o[ tutorial](https://docs.workadventu.re/map-building/tiled-editor/).
 
-👨🏻‍🔧 If you have any questions, feel free to ask in the [WorkAdventure office](https://play.staging.workadventu.re/@/tcm/workadventure/wa-village).
+👨🏻‍🔧 Se você tiver alguma dúvida, sinta-se à vontade para perguntar no [escritório do WorkAdventure](https://play.staging.workadventu.re/@/tcm/workadventure/wa-village).
 
-## 🚀 Upload your map
+## 🚀 Faça o Upload do seu mapa
 
-In the `.env` file, you can set your upload strategy to `MAP_STORAGE` (default) or `GH_PAGES`. Simply comment out the option you don't want to use.
+No arquivo `.env`, você pode definir sua estratégia de upload como `MAP_STORAGE` (padrão) ou `GH_PAGES`. Basta comentar a opção que você não deseja usar.
 
-Uploading a map using the [WA map storage](https://docs.workadventu.re/map-building/tiled-editor/publish/wa-hosted) will host your project on WA servers.
+Fazer o upload de um mapa usando o [armazenamento de mapas do WA](https://docs.workadventu.re/map-building/tiled-editor/publish/wa-hosted) hospeda seu projeto nos servidores do WA.
 
-Uploading a map using [GitHub Pages](https://docs.github.com/pages) will host your project on GitHub servers. It's a bit more difficult to set up, and can only be used with public repositories (or with private repositories if you have a Github active subscription).
+Fazer o upload de um mapa usando as [GitHub Pages](https://docs.github.com/pages) hospeda seu projeto nos servidores do GitHub. A configuração é um pouco mais complexa e só pode ser usada com repositórios públicos (ou com privados se você tiver uma assinatura ativa do GitHub).
 
-## 🗂️ Project Structure
+## 🗂️ Estrutura do projeto
 
 ```
 map-starter-kit/
-├── 📁 app/                    # Server entry point (loads @workadventure/map-starter-kit-core)
-│   └── app.ts                 # Re-exports the Express app from the core package
+├── 📁 app/                    # Ponto de entrada do servidor (carrega @workadventure/map-starter-kit-core)
+│   └── app.ts                 # Reexporta a aplicação Express do core package
 │
-├── 📁 src/                    # Map scripts (Browser/WorkAdventure) ⚠️ REQUIRED
-│   └── main.ts                # Your map scripts go here
+├── 📁 src/                    # Scripts do mapa (Navegador/WorkAdventure) ⚠️ OBRIGATÓRIO
+│   └── main.ts                # Seus scripts do mapa ficam aqui
 │
 │
-├── 📁 tilesets/               # Map tileset images (PNG)
+├── 📁 tilesets/               # Imagens de tilesets do mapa (PNG)
 │
-├── 📄 *.tmj                   # Map files (office.tmj, conference.tmj, etc.)
-├── 📄 vite.config.ts          # Vite configuration
-└── 📄 package.json            # Dependencies and scripts
+├── 📄 *.tmj                   # Arquivos do mapa (office.tmj, conference.tmj, etc.)
+├── 📄 vite.config.ts          # Configuração do Vite
+└── 📄 package.json            # Dependências e scripts
 ```
 
-The **server** (Express app, controllers, HTML publishing pages, static assets) is provided by the npm package **`@workadventure/map-starter-kit-core`**. Updating this dependency gives you new publishing UI and server features without changing your maps or config.
+O **servidor** (aplicação Express, controllers, páginas HTML de publicação, assets estáticos) é fornecido pelo pacote npm **`@workadventure/map-starter-kit-core`**. Atualizar essa dependência lhe dá uma nova interface de publicação e recursos do servidor sem alterar seus mapas ou configuração.
 
-### Quick Reference
+### Referência rápida
 
-- *`src/`*: **Map scripts** (MUST be here for compilation) ⚠️
-- *`tilesets/`*: All PNG tilesets
-- *`app/`*: **Server entry point** – loads the core package; do not add server logic here
+- *`src/`*: **Scripts do mapa** (DEVEM estar aqui para compilação) ⚠️
+- *`tilesets/`*: Todos os tilesets em PNG
+- *`app/`*: **Ponto de entrada do servidor** – carrega o core package; não adicione lógica do servidor aqui
 
 > [!TIP]
-> - If you want to use more than one map file, just add the new map file in the root folder (we recommend creating a copy of *office.tmj* and editing it to avoid any mistakes).
-> - We recommend using **512x512** images for the map thumbnails.
-> - If you are going to create custom websites to embed in the map, please reference the HTML files in the `input` option in *buildmap.vite.config.js*.
+> - Se você quiser usar mais de um arquivo de mapa, basta adicionar o novo arquivo na raiz do projeto (recomendamos criar uma cópia de *office.tmj* e editar para evitar erros).
+> - Recomendamos usar imagens de **512x512** para as miniaturas dos mapas.
+> - Se você for criar sites personalizados para incorporar no mapa, por favor, referencie os arquivos HTML na opção `input` em *buildmap.vite.config.js*.
 
-### 📁 Server entry point (`app/`)
+### 📁 Ponto de entrada do servidor (`app/`)
 
-The `app/` directory contains only the **entry point** that loads the server from **`@workadventure/map-starter-kit-core`**.
+O diretório `app/` contém apenas o **entry point** que carrega o servidor a partir de **`@workadventure/map-starter-kit-core`**.
 
-- *`app.ts`*: Imports and re-exports the Express app from the core package (for Vite’s server plugin).
+- *`app.ts`*: Importa e reexporta a aplicação Express do core package (para o plugin do servidor Vite).
 
-The actual server (Express, routes, HTML pages, upload, map storage) lives in the dependency. To get updates to the publishing UI and server behaviour, run `npm update @workadventure/map-starter-kit-core`.
-
-> [!IMPORTANT]
-> Do **not** add server logic or new controllers in `app/`. The server is fully provided by the core package.
-
-### 📁 Map Scripts Development (`src/`) ⚠️
-
-The `src/` directory is where you **MUST** place **all map-related scripts** that will be executed in the browser. See [src/README.md](./src/README.md) for detailed documentation and examples.
-
-- *`main.ts`*: Main map script (referenced in `.tmj` files)
+O servidor real (Express, rotas, páginas HTML, upload, armazenamento de mapas) fica na dependência. Para receber atualizações da interface de publicação e do comportamento do servidor, execute `npm update @workadventure/map-starter-kit-core`.
 
 > [!IMPORTANT]
-> **All map scripts MUST be placed in the `src/` directory** to be properly compiled and bundled by Vite. Scripts in this directory are:
-> - Automatically transformed from TypeScript to JavaScript
-> - Bundled with their npm dependencies (like `@workadventure/scripting-api-extra`)
-> - Served with the correct MIME types
-> - Referenced in your `.tmj` map files using paths like `src/main.ts`
+> Não adicione lógica de servidor nem novos controllers em `app/`. O servidor é totalmente fornecido pelo core package.
+
+### 📁 Desenvolvimento de scripts do mapa (`src/`) ⚠️
+
+O diretório `src/` é onde você **DEVE** colocar **todos os scripts relacionados ao mapa** que serão executados no navegador. Consulte [src/README.md](./src/README.md) para documentação detalhada e exemplos.
+
+- *`main.ts`*: Script principal do mapa (referenciado nos arquivos `.tmj`)
+
+> [!IMPORTANT]
+> **Todos os scripts do mapa DEVEM ficar no diretório `src/`** para serem compilados e agrupados corretamente pelo Vite. Os scripts neste diretório são:
+> - Transformados automaticamente de TypeScript para JavaScript
+> - Empacotados com suas dependências npm (como `@workadventure/scripting-api-extra`)
+> - Servidos com os tipos MIME corretos
+> - Referenciados em seus arquivos de mapa `.tmj` usando caminhos como `src/main.ts`
 
 > [!WARNING]
-> Do not place map scripts outside the `src/` directory. They will not be compiled correctly and will cause errors in the browser.
+> Não coloque scripts do mapa fora do diretório `src/`. Eles não serão compilados corretamente e causarão erros no navegador.
 
-## 📜 Requirements
+## 📜 Requisitos
 
-- Node.js version >= 18
+- Node.js versão >= 18
 
-## 🛠️ Installation and Testing
+## 🛠️ Instalação e testes
 
-### Prerequisites
+### Pré-requisitos
 
-- **Node.js** version >= 18 ([Download Node.js](https://nodejs.org/en/))
-- **npm** (comes with Node.js)
+- **Node.js** versão >= 18 ([Baixar Node.js](https://nodejs.org/en/))
+- **npm** (vem com o Node.js)
 
-### 📦 Installation
+### 📦 Instalação
 
-1. Clone or download this repository
-2. Navigate to the project root directory
-3. Install dependencies:
+1. Clone ou baixe este repositório
+2. Navegue até a raiz do projeto
+3. Instale as dependências:
 
 ```bash
 npm install
 ```
 
-This will install all required dependencies, including Vite, TypeScript, WorkAdventure packages, and **`@workadventure/map-starter-kit-core`** (server and publishing UI).
+Isso instalará todas as dependências necessárias, incluindo Vite, TypeScript, pacotes do WorkAdventure e **`@workadventure/map-starter-kit-core`** (servidor e interface de publicação).
 
-### 🚀 Development
+### 🚀 Desenvolvimento
 
-#### Start Development Server
+#### Iniciar servidor de desenvolvimento
 
-Start the Vite development server with hot module replacement:
+Inicie o servidor de desenvolvimento do Vite com atualização em tempo real:
 
 ```bash
 npm run dev
 ```
 
-This will:
-- Start the Vite dev server (usually on `http://localhost:5173`)
-- Enable hot module replacement for instant updates
-- Automatically transform TypeScript files in `src/`
-- Serve your maps and assets
+Isso irá:
+- Iniciar o servidor Vite (normalmente em `http://localhost:5173`)
+- Habilitar recarga instantânea para atualizações rápidas
+- Transformar automaticamente arquivos TypeScript em `src/`
+- Servir seus mapas e ativos
 
 > [!TIP]
-> The development server will automatically open your browser. If not, navigate to the URL shown in the terminal.
+> O servidor de desenvolvimento abrirá seu navegador automaticamente. Se não abrir, navegue até a URL mostrada no terminal.
 
-#### Test Production Build
+#### Testar build de produção
 
-To test how your map will behave in production:
+Para testar como seu mapa se comportará em produção:
 
 ```bash
-# Build the optimized production version for your map
+# Compila a versão otimizada do mapa para produção
 npm run buildmap
 
-# Serve the generated dist/ directory with CORS headers
+# Serve o diretório dist/ com cabeçalhos CORS
 npm run preview
 
 ```
 
-This will:
-- Compile TypeScript to JavaScript
-- Optimize and bundle all assets
-- Create a production-ready `dist/` folder
-- Start a preview server to test the optimized build
+Isso irá:
+- Compilar TypeScript para JavaScript
+- Otimizar e empacotar todos os ativos
+- Criar uma pasta `dist/` pronta para produção
+- Iniciar um servidor de preview para testar o build otimizado
 
-### 📤 Upload Your Map
+### 📤 Upload do mapa
 
-#### Upload to WA Map Storage
+#### Upload para o WA Map Storage
 
-To upload your map to the WorkAdventure Map Storage:
+Para enviar seu mapa para o armazenamento de mapas do WorkAdventure:
 
 ```bash
 npm run upload
 ```
 
-This command will:
-1. Build your map (`npm run buildmap`)
-2. Upload it to the configured WA Map Storage
+Este comando irá:
+1. Compilar seu mapa (`npm run buildmap`)
+2. Enviar para o WA Map Storage configurado
 
 > [!IMPORTANT]
-> Before uploading, you need to configure your upload settings. The upload feature requires three environment variables:
+> Antes do upload, você precisa configurar suas opções de envio. O recurso de upload requer três variáveis de ambiente:
 
-1. **`MAP_STORAGE_URL`** - Your WorkAdventure Map Storage URL
-   - *Local development*: Created in `.env` by the upload command
-   - *CI/CD*: Add as a GitHub secret (optional)
+1. **`MAP_STORAGE_URL`** - URL do seu WorkAdventure Map Storage
+   - *Desenvolvimento local*: Criada em `.env` pelo comando de upload
+   - *CI/CD*: Adicione como segredo do GitHub (opcional)
 
-2. **`MAP_STORAGE_API_KEY`** - Your API key for authentication
-   - *Local development*: Created in `.env.secret` by the upload command
-   - *CI/CD*: Add as a GitHub secret (required)
+2. **`MAP_STORAGE_API_KEY`** - Sua chave de API para autenticação
+   - *Desenvolvimento local*: Criada em `.env.secret` pelo comando de upload
+   - *CI/CD*: Adicione como segredo do GitHub (obrigatório)
 
-3. **`UPLOAD_DIRECTORY`** - Directory path on the storage server
-   - *Local development*: Created in `.env` by the upload command
-   - *CI/CD*: Add as a GitHub secret (optional)
+3. **`UPLOAD_DIRECTORY`** - Caminho do diretório no servidor de armazenamento
+   - *Desenvolvimento local*: Criado em `.env` pelo comando de upload
+   - *CI/CD*: Adicione como segredo do GitHub (opcional)
 
-#### Configure Upload Settings
+#### Configurar opções de upload
 
-You can configure these settings through the web interface:
-1. Start the development server (`npm run dev`)
-2. Navigate to the upload configuration page
-3. Fill in your Map Storage credentials
-4. Save and upload your map
+Você pode configurar essas opções através da interface web:
+1. Inicie o servidor de desenvolvimento (`npm run dev`)
+2. Navegue até a página de configuração de upload
+3. Preencha suas credenciais do Map Storage
+4. Salve e envie seu mapa
 
-For more details, read [the WorkAdventure upload documentation](https://docs.workadventu.re/map-building/tiled-editor/publish/wa-hosted).
+Para mais detalhes, leia a [documentação de upload do WorkAdventure](https://docs.workadventu.re/map-building/tiled-editor/publish/wa-hosted).
 
-### 📋 Available Scripts
+### 📋 Scripts disponíveis
 
-| Command | Description |
+| Comando | Descrição |
 |---------|-------------|
-| `npm run dev` | Start Vite development server with hot reload |
-| `npm run buildmap` | Build only the map files (without frontend) |
-| `npm run preview` | Serve the generated `dist/` directory with CORS headers after `npm run buildmap` |
-| `npm run upload` | Build and upload map to WA Map Storage |
-| `npm run upload-only` | Upload map without rebuilding (requires existing build) |
+| `npm run dev` | Inicia o servidor Vite com recarga automática |
+| `npm run buildmap` | Compila apenas os arquivos do mapa (sem frontend) |
+| `npm run preview` | Serve o diretório `dist/` gerado com cabeçalhos CORS após `npm run buildmap` |
+| `npm run upload` | Compila e envia o mapa para o WA Map Storage |
+| `npm run upload-only` | Envia o mapa sem recompilar (requer build existente) |
 
-## 📜 Licenses
+## 📜 Licenças
 
-This project contains multiple licenses as follows:
+Este projeto contém várias licenças, conforme abaixo:
 
-* [Code license](./LICENSE.code) *(all files except those for other licenses)*
-* [Map license](./LICENSE.map) *(`office.tmj` and the map visual as well)*
-* [Assets license](./LICENSE.assets) *(the files inside the `tilesets/` folder)*
+* [Licença do código](./LICENSE.code) *(todos os arquivos, exceto os de outras licenças)*
+* [Licença do mapa](./LICENSE.map) *(`office.tmj` e a aparência visual do mapa também)*
+* [Licença dos ativos](./LICENSE.assets) *(os arquivos dentro da pasta `tilesets/`)*
 
 > [!IMPORTANT]
-> If you add third party assets in your map, do not forget to:
-> 1. Credit the author and license of a tileset with the "tilesetCopyright" property by etiding the tileset in Tiled.
-> 2. Add the tileset license text in *LICENSE.assets*.
-> 3. Credit the author and license of a map with the "mapCopyright" property in the custom properties of the map.
-> 4. Add the map license text in *LICENSE.map*.
+> Se você adicionar ativos de terceiros ao seu mapa, não se esqueça de:
+> 1. Creditar o autor e a licença de um tileset com a propriedade "tilesetCopyright" editando o tileset no Tiled.
+> 2. Adicionar o texto da licença do tileset em *LICENSE.assets*.
+> 3. Creditar o autor e a licença de um mapa com a propriedade "mapCopyright" nas propriedades personalizadas do mapa.
+> 4. Adicionar o texto da licença do mapa em *LICENSE.map*.
 
-## ❓ Need Help
+## ❓ Precisa de ajuda?
 
-If you have any questions or need further assistance, don't hesitate to ask either by [email](mailto:hello@workadventu.re) or [Discord](https://discord.gg/G6Xh9ZM9aR)!
+Se você tiver alguma dúvida ou precisar de mais assistência, não hesite em perguntar por [email](mailto:hello@workadventu.re) ou no [Discord](https://discord.gg/G6Xh9ZM9aR)!
